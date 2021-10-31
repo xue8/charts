@@ -19,7 +19,7 @@ entries:
     keywords:
     - ingress
     - nginx
-    kubeVersion: '>=1.18.0-0'
+    kubeVersion: '>=1.19.0-0'
     maintainers:
     - name: ChiefAlexander
     name: ingress-nginx
