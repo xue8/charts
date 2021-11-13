@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-db
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-db
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        env: 
+          - name: MARIADB_USER
+            value: {{ .Values.db.dbUsername }}
+          - name: MARIADB_PASSWORD
+            value: {{ .Values.db.dbPassword }}
+          - name: MARIADB_ROOT_PASSWORD
+            value: {{ .Values.db.rootPassword }}
+        image: {{ .Values.db.repository }}:{{ .Values.db.tag }}
+        pullPolicy: {{ .Values.db.pullPolicy }}:
+        ports:
+        - containerPort: {{ .Values.db.port }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-mariadb
+spec:
+  ports:
+  - port: {{ .Values.db.port }}
+    protocol: TCP
+    targetPort: {{ .Values.db.port }}
+  selector:
+    app: {{ .Values.name }}-db
