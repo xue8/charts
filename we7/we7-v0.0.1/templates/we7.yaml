@@ -53,8 +53,12 @@ spec:
       - path: /
         pathType: Prefix
         backend:
+          {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion }}
           service:
             name: {{ .Chart.Name }}-service 
-            port: 
-             number: {{ .Values.controller.port }} 
-          
+            port:
+              number: {{ .Values.controller.port }} 
+          {{- else }}
+          serviceName: {{ .Chart.Name }}-service 
+          servicePort: {{ .Values.controller.port }} 
+          {{- end }}
