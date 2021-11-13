@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-deployment
+  name: {{ .Chart.Name }}-deployment
 spec:
   replicas: {{ .Values.controller.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.name }}-controller
+      app: {{ .Chart.Name }}-controller
   template:
     metadata:
       labels:
-        app: {{ .Values.name }}-controller
+        app: {{ .Chart.Name }}-controller
     spec:
       containers:
-      - name: {{ .Values.name }}
+      - name: {{ .Chart.Name }}
         image: {{ .Values.controller.repository }}:{{ .Values.controller.tag }}
-        pullPolicy: {{ .Values.controller.pullPolicy }}:
+        imagePullPolicy: {{ .Values.controller.pullPolicy }}
         ports:
         - containerPort: {{ .Values.controller.port }}
 
@@ -24,21 +24,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}-service
+  name: {{ .Chart.Name }}-service
 spec:
   ports:
   - port: {{ .Values.controller.port }}
     protocol: TCP
     targetPort: {{ .Values.controller.port }}
   selector:
-    app: {{ .Values.name }}-controller
+    app: {{ .Chart.Name }}-controller
 
 ---
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.name }}-ingress
+  name: {{ .Chart.Name }}-ingress
 spec:
   rules:
   - host: {{ .Values.host }}
@@ -47,5 +47,8 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          serviceName: {{ .Values.name }}-service
-          servicePort: {{ .Values.controller.port }}
+          service:
+            name: {{ .Chart.Name }}-service 
+            port: 
+             number: {{ .Values.controller.port }} 
+          

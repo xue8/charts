@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-mariadb
+  name: {{ .Chart.Name }}-mariadb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.name }}-db
+      app: {{ .Chart.Name }}-db
   template:
     metadata:
       labels:
-        app: {{ .Values.name }}-db
+        app: {{ .Chart.Name }}-db
     spec:
       containers:
-      - name: {{ .Values.name }}
+      - name: {{ .Chart.Name }}
         env: 
           - name: MARIADB_USER
             value: {{ .Values.db.dbUsername }}
@@ -22,7 +22,7 @@ spec:
           - name: MARIADB_ROOT_PASSWORD
             value: {{ .Values.db.rootPassword }}
         image: {{ .Values.db.repository }}:{{ .Values.db.tag }}
-        pullPolicy: {{ .Values.db.pullPolicy }}
+        imagePullPolicy: {{ .Values.db.pullPolicy }}
         ports:
         - containerPort: {{ .Values.db.port }}
 
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}-mariadb
+  name: {{ .Chart.Name }}-mariadb
 spec:
   ports:
   - port: {{ .Values.db.port }}
     protocol: TCP
     targetPort: {{ .Values.db.port }}
   selector:
-    app: {{ .Values.name }}-db
+    app: {{ .Chart.Name }}-db

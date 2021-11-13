@@ -5,7 +5,7 @@
 controller:
   repository: xue8/amd64-we7
   pullPolicy: IfNotPresent
-  tag: v0.0.2
+  tag: 'v0.0.2'
   port: 80
   replicaCount: 1
 
@@ -15,7 +15,7 @@ db:
   dbRootPassword: root
   repository: mariadb
   pullPolicy: IfNotPresent
-  tag: 10.4
+  tag: '10.4'
   port: 3306
 
 host: a.com
