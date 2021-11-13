@@ -10,7 +10,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.0.4
-    created: "2021-11-13T19:08:48.84481+08:00"
+    created: "2021-11-13T19:10:39.6099+08:00"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
     digest: 0fca19e8023abdedf9c0fecc64932f452d9e26084b595aae0927225ea5db8376
@@ -34,7 +34,7 @@ entries:
         - Fix chart-releaser action
     apiVersion: v2
     appVersion: 0.41.2
-    created: "2021-11-13T19:08:48.842579+08:00"
+    created: "2021-11-13T19:10:39.607467+08:00"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
     digest: e430d4cc76dbff3380e7d4d1b655cb062bb58a30a217576eeabed670f20103f0
@@ -56,12 +56,12 @@ entries:
   we7:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-11-13T19:08:48.845004+08:00"
+    created: "2021-11-13T19:10:39.610088+08:00"
     description: A Helm chart for Kubernetes
-    digest: aca4400646ad7109cc4e1669b6752dfa7200626578d23896e4b68c6005e26061
+    digest: 07edf0d75735ff16822f8a953483075dd775051bd12bd2dc5e0d6215fa3c8942
     name: we7
     type: application
     urls:
     - we7-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-13T19:08:48.839719+08:00"
+generated: "2021-11-13T19:10:39.604914+08:00"
