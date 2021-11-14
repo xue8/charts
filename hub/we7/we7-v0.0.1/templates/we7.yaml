@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ .Chart.Name }}-{{ .Values.id }}-deployment
 spec:
   replicas: {{ .Values.controller.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-controller
+      app: {{ .Chart.Name }}-{{ .Values.id }}-controller
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-controller
+        app: {{ .Chart.Name }}-{{ .Values.id }}-controller
     spec:
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ .Chart.Name }}-{{ .Values.id }}
         image: {{ .Values.controller.repository }}:{{ .Values.controller.tag }}
         imagePullPolicy: {{ .Values.controller.pullPolicy }}
         ports:
@@ -24,14 +24,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Chart.Name }}-service
+  name: {{ .Chart.Name }}-{{ .Values.id }}-service
 spec:
   ports:
   - port: {{ .Values.controller.port }}
     protocol: TCP
     targetPort: {{ .Values.controller.port }}
   selector:
-    app: {{ .Chart.Name }}-controller
+    app: {{ .Chart.Name }}-{{ .Values.id }}-controller
 
 ---
 
@@ -44,7 +44,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ .Chart.Name }}-ingress
+  name: {{ .Chart.Name }}-{{ .Values.id }}-ingress
 spec:
   rules:
   - host: {{ .Values.host }}
@@ -55,10 +55,10 @@ spec:
         backend:
           {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion }}
           service:
-            name: {{ .Chart.Name }}-service 
+            name: {{ .Chart.Name }}-{{ .Values.id }}-service 
             port:
               number: {{ .Values.controller.port }} 
           {{- else }}
-          serviceName: {{ .Chart.Name }}-service 
+          serviceName: {{ .Chart.Name }}-{{ .Values.id }}-service 
           servicePort: {{ .Values.controller.port }} 
           {{- end }}
