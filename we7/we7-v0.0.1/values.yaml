@@ -10,9 +10,9 @@ controller:
   replicaCount: 1
 
 db:
-  dbUsername: root
-  dbPassword: root
-  dbRootPassword: root
+  dbUsername: user
+  dbPassword: user 
+  dbRootPassword: mysql_passwd
   repository: mariadb
   pullPolicy: IfNotPresent
   tag: '10.4'

@@ -20,7 +20,7 @@ spec:
           - name: MARIADB_PASSWORD
             value: {{ .Values.db.dbPassword }}
           - name: MARIADB_ROOT_PASSWORD
-            value: {{ .Values.db.rootPassword }}
+            value: {{ .Values.db.dbRootPassword }}
         image: {{ .Values.db.repository }}:{{ .Values.db.tag }}
         imagePullPolicy: {{ .Values.db.pullPolicy }}
         ports:
