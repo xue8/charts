@@ -1,0 +1,21 @@
+# Default values for we7.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+controller:
+  repository: xue8/amd64-discuz
+  pullPolicy: IfNotPresent
+  tag: 'v0.0.1'
+  port: 80
+  replicaCount: 1
+
+db:
+  dbUsername: user
+  dbPassword: user 
+  dbRootPassword: mysql_passwd
+  repository: mariadb
+  pullPolicy: IfNotPresent
+  tag: '10.4'
+  port: 3306
+
+host: a.com
